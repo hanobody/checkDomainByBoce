@@ -1,0 +1,6 @@
+timeconfig:
+  waitreport: 1
+  nextaction: 2
+telegram:
+  bottoken: 6632375152:AAHqAthzJfM617m8DRNWTRvwvXJRIWpbd-4
+  groupid: -1001779525647

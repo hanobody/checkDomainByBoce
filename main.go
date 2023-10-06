@@ -11,6 +11,8 @@ import (
 )
 
 func main() {
+	tools.InitConfig()
+
 	for {
 		token := "889fd8a2da614502f3b7d623c1c1bb81"
 
@@ -26,7 +28,7 @@ func main() {
 		taskID := tools.CreateTasks(token, hosts)
 
 		// 沉睡1分钟等待结果
-		var waitreport = viper.GetInt("time.waitreport")
+		var waitreport = viper.GetInt("timeconfig.waitreport")
 		time.Sleep(time.Minute * time.Duration(waitreport))
 
 		// 获取 JSON 数据

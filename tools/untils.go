@@ -1,6 +1,7 @@
 package tools
 
 import (
+	"fmt"
 	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
@@ -29,4 +30,13 @@ func TelegramSender(msg string) {
 	if err != nil {
 		log.Panic(err)
 	}
+}
+func InitConfig() {
+	viper.SetConfigName("config")
+	viper.AddConfigPath("config")
+	err := viper.ReadInConfig()
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("config app inited")
 }
