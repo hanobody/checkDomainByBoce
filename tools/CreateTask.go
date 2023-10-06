@@ -43,6 +43,7 @@ func CreateTasks(token string, hosts []string) []string {
 	}
 
 	// 创建任务并处理每个域名
+retryLoop:
 	for _, host := range hosts {
 		// 定义要请求的URL
 		url := "https://api.boce.com/v3/task/create/curl?key=" + token + "&node_ids=" + nodes + "&host=" + host
@@ -58,8 +59,8 @@ func CreateTasks(token string, hosts []string) []string {
 		var jsonResponse CreateTask
 		decoder := json.NewDecoder(response.Body)
 		if err := decoder.Decode(&jsonResponse); err != nil {
-			fmt.Printf("处理域名 %s 时无法解码JSON响应: %v\n", host, err)
-			continue
+			fmt.Printf("处理域名 %s 时无法解码JSON响应: %v,程序将自动重新执行一遍\n", host, err)
+			continue retryLoop
 		}
 
 		// 检查是否存在错误

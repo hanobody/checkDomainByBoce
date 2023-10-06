@@ -4,10 +4,11 @@ import (
 	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	"github.com/spf13/viper"
 )
 
 func TelegramSender(msg string) {
-	bot, err := tgbotapi.NewBotAPI("6632375152:AAHqAthzJfM617m8DRNWTRvwvXJRIWpbd-4")
+	bot, err := tgbotapi.NewBotAPI(viper.GetString("telegram.bottoken"))
 	if err != nil {
 		log.Panic(err)
 	}
@@ -18,7 +19,7 @@ func TelegramSender(msg string) {
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
 	// 替换成你的群组Chat ID
-	chatID := int64(-1001779525647)
+	chatID := int64(viper.GetInt("telegram.groupid"))
 
 	// 配置消息
 	sendTxt := tgbotapi.NewMessage(chatID, msg)
