@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"os"
 	"time"
+
+	"github.com/spf13/viper"
 )
 
 func main() {
@@ -24,7 +26,8 @@ func main() {
 		taskID := tools.CreateTasks(token, hosts)
 
 		// 沉睡1分钟等待结果
-		time.Sleep(1 * time.Minute)
+		var waitreport = viper.GetInt("time.waitreport")
+		time.Sleep(time.Minute * time.Duration(waitreport))
 
 		// 获取 JSON 数据
 		responses, err := myapi.FetchJSONData(taskID, token)
@@ -62,6 +65,8 @@ func main() {
 			tools.TelegramSender(output)
 			fmt.Fprint(file, output)
 		}
-		time.Sleep(2 * time.Hour)
+		// 沉睡2小时等下次检测
+		var nextaction = viper.GetInt("time.nextaction")
+		time.Sleep(time.Minute * time.Duration(nextaction))
 	}
 }
