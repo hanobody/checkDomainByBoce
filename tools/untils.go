@@ -36,7 +36,8 @@ func InitConfig() {
 	viper.AddConfigPath("config")
 	err := viper.ReadInConfig()
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("配置文件无法加载，请检查配置文件格式是否正确", err)
+		return
 	}
-	fmt.Println("config app inited")
+	fmt.Println("配置文件加载成功")
 }

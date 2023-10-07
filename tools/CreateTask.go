@@ -50,8 +50,8 @@ retryLoop:
 
 		response, err := http.Post(url, "application/json", nil)
 		if err != nil {
-			fmt.Printf("处理域名 %s 时发生HTTP请求错误: %v\n", host, err)
-			continue
+			fmt.Printf("处理域名 %s 时发生HTTP请求错误: %v,程序将自动重新执行一遍\n", host, err)
+			continue retryLoop
 		}
 		defer response.Body.Close()
 

@@ -51,7 +51,7 @@ func ProcessNodes(token string) string {
 	var idStrings []string
 	var nodesNumber int
 	for _, node := range jsonResponse.Data.List {
-		if node.ISPName != "海外" {
+		if node.ISPName != "海外" && node.ISPName != "港澳台" {
 			idStrings = append(idStrings, fmt.Sprintf("%d", node.ID))
 			nodesNumber++
 		}

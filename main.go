@@ -68,7 +68,8 @@ func main() {
 			fmt.Fprint(file, output)
 		}
 		// 沉睡2小时等下次检测
-		var nextaction = viper.GetInt("time.nextaction")
-		time.Sleep(time.Minute * time.Duration(nextaction))
+		var nextaction = viper.GetInt("timeconfig.nextaction")
+		fmt.Printf("每隔%d小时执行一次检测\n", nextaction)
+		time.Sleep(time.Hour * time.Duration(nextaction))
 	}
 }
